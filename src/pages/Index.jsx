@@ -10,7 +10,6 @@ const Index = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setFile(file);
-    // Placeholder for file parsing logic
     console.log('File uploaded:', file.name);
   };
 
@@ -26,7 +25,6 @@ const Index = () => {
   };
 
   const handleExport = () => {
-    // Placeholder for export logic
     console.log('Exporting data');
   };
 
