@@ -17,7 +17,7 @@ const Index = () => {
     // Placeholder for file upload logic
     console.log('Processing file:', file.name);
     // Simulate quote parsing
-    setQuotes([{ id: 1, product: 'Product A', quantity: 10 }]);
+    setQuotes([{ id: 1, product: 'Product A', quantity: 10, price: 100, description: 'High quality steel product.' }]);
   };
 
   const handleSearchChange = (event) => {
@@ -44,8 +44,10 @@ const Index = () => {
             <Input placeholder="Search products..." value={searchTerm} onChange={handleSearchChange} />
             {quotes.map((quote) => (
               <Box key={quote.id} p={3} shadow="md" borderWidth="1px">
-                <Text>Product: {quote.product}</Text>
+                <Text fontWeight="bold">Product: {quote.product}</Text>
                 <Text>Quantity: {quote.quantity}</Text>
+                <Text>Price: {quote.price ?? 'N/A'}</Text>
+                <Text>Description: {quote.description ?? 'No description available'}</Text>
               </Box>
             ))}
             <Button colorScheme="green" onClick={handleExport}>Export Mapped Quotes</Button>
