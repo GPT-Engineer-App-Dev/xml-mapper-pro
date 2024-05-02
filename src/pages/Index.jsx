@@ -1,4 +1,5 @@
 import { Box, Button, Input, Text, VStack, Heading, Flex } from '@chakra-ui/react';
+import { parseString } from 'xml2js';
 import { useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 
@@ -15,10 +16,25 @@ const Index = () => {
   };
 
   const handleFileUpload = () => {
-    // Placeholder for file upload logic
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const xml = event.target.result;
+      parseString(xml, (err, result) => {
+        if (err) {
+          console.error('Error parsing XML:', err);
+          return;
+        }
+        // Assuming the XML structure contains a 'quotes' root element with multiple 'quote' children
+        const quotes = result.quotes.quote.map(q => ({
+          id: q.id[0],
+          product: q.product[0],
+          quantity: parseInt(q.quantity[0], 10)
+        }));
+        setQuotes(quotes);
+      });
+    };
+    reader.readAsText(file);
     console.log('Processing file:', file.name);
-    // Simulate quote parsing
-    setQuotes([{ id: 1, product: 'Product A', quantity: 10 }]);
   };
 
   const handleSearchChange = (event) => {
